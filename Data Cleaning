@@ -1,18 +1,21 @@
 /* CLEANING DATA WITH SQL */
 
+/* This project was created following Alex The Analyst's tutorial, but most of these queries I wrote on my own. */
+
 SELECT *
 FROM PortfolioProject..nashvilleHousing;
 
+-----------------------------------------------------------------------------------------------
 
--- Standardize Date Format
+-- Standardizing Date Format
 
 ALTER TABLE PortfolioProject..nashvilleHousing
 ALTER COLUMN  SaleDate DATE;
 
 
----------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
 
--- Populate Property Address Data
+-- Populating Property Address Data
 
 SELECT *
 FROM PortfolioProject..nashvilleHousing
@@ -42,7 +45,6 @@ JOIN PortfolioProject..nashvilleHousing b
 -- Breaking out Property Address Into Individual Columns (Address, City)
 
 SELECT PropertyAddress, 
-	TRIM(SUBSTRING(PropertyAddress, 0, CHARINDEX(' ', PropertyAddress))) as Number,
 	TRIM(SUBSTRING(PropertyAddress, 0, CHARINDEX(',', PropertyAddress))) AS Address,
 	TRIM(SUBSTRING(PropertyAddress, CHARINDEX(',', PropertyAddress)+2, LEN(PropertyAddress))) AS City
 FROM PortfolioProject..nashvilleHousing
@@ -63,19 +65,16 @@ UPDATE PortfolioProject..nashvilleHousing
 SET  PropertySplitCity = TRIM(SUBSTRING(PropertyAddress, CHARINDEX(',', PropertyAddress)+2, LEN(PropertyAddress)))
 
 
- select *
- from PortfolioProject..nashvilleHousing
 
 
-
- -- Breaking out Owner Address Into Individual Columns (Address, City, State)
+-- Breaking out Owner Address Into Individual Columns (Address, City, State)
 
 
 SELECT 
 	TRIM(PARSENAME(REPLACE(OwnerAddress, ',', '.'), 3)) AS Address,
 	TRIM(PARSENAME(REPLACE(OwnerAddress, ',', '.'), 2)) AS City,
 	TRIM(PARSENAME(REPLACE(OwnerAddress, ',', '.'), 1)) AS State
- FROM PortfolioProject..NashvilleHousing
+FROM PortfolioProject..NashvilleHousing
 
 
 ALTER TABLE PortfolioProject..nashvilleHousing
@@ -103,10 +102,10 @@ UPDATE PortfolioProject..nashvilleHousing
 SET OwnerSplitState = TRIM(PARSENAME(REPLACE(OwnerAddress, ',', '.'), 1))
 
 
- -------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
 
 
- -- Change Yes of No to Y or N in SoldAsVacant
+-- Changing 'Yes' and 'No' to 'Y' or 'N' in SoldAsVacant
 
 
 SELECT DISTINCT SoldAsVacant
@@ -129,9 +128,9 @@ SET SoldAsVacant = CASE WHEN SoldAsVacant = 'Yes' THEN 'Y'
 
 
 
-------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
 
--- Remove Duplicates
+-- Removing Duplicates
 
 with cte as
 (
@@ -148,7 +147,7 @@ WHERE row_num >1
 
 
 
----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------
 
 
 -- Deleting Unused Columns
