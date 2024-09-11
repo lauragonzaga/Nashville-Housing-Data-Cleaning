@@ -1,5 +1,7 @@
 /* CLEANING DATA WITH SQL */
 
+/* This project was created following the tutorial on Alex The Analyst's channel, but most of these queries I created on my own. */
+
 SELECT *
 FROM PortfolioProject..nashvilleHousing;
 
