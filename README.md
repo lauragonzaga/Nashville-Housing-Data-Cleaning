@@ -3,4 +3,4 @@ However, most of these queries I wrote on my own while pausing the video. I most
 
 Here is the link to the dataset: https://github.com/AlexTheAnalyst/PortfolioProjects/blob/main/Nashville%20Housing%20Data%20for%20Data%20Cleaning.xlsx
 
-This was made is Microsoft SQL Server Management Studio 20.
+This was made in Microsoft SQL Server Management Studio 20.
